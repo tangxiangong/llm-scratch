@@ -3,9 +3,18 @@ name = "llm-scratch"
 version = "0.1.0"
 edition = "2024"
 authors = ["tangxiangong <tangxiangong@gmail.com>"]
-description = "Build a Large Language Model (From Scratch) Rust Edition"
+description = "Build a Large Language Model (From Scratch) -- Rust Edition"
 publish = false
 license = "Apache-2.0 OR MIT"
 
+[features]
+default = []
+mkl = ["candle-core/mkl"]
+cuda = ["candle-core/cudnn"]
+
 [dependencies]
+[target.'cfg(not(all(target_arch = "aarch64", target_os = "macos")))'.dependencies]
+candle-core = { version = "0.9.1" }
+
+[target.'cfg(all(target_arch = "aarch64", target_os = "macos"))'.dependencies]
 candle-core = { version = "0.9.1", features = ["metal"] }

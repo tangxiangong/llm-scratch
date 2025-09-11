@@ -9,12 +9,15 @@ license = "Apache-2.0 OR MIT"
 
 [features]
 default = []
-mkl = ["candle-core/mkl"]
-cuda = ["candle-core/cudnn"]
+mkl = ["candle-core/mkl", "candle-nn/mkl", "intel-mkl-src"]
+cuda = ["candle-core/cudnn", "candle-nn/cudnn"]
 
 [dependencies]
-[target.'cfg(not(all(target_arch = "aarch64", target_os = "macos")))'.dependencies]
-candle-core = { version = "0.9.1" }
 
 [target.'cfg(all(target_arch = "aarch64", target_os = "macos"))'.dependencies]
 candle-core = { version = "0.9.1", features = ["metal"] }
+candle-nn = { version = "0.9.1", features = ["metal"] }
+[target.'cfg(not(all(target_arch = "aarch64", target_os = "macos")))'.dependencies]
+candle-core = { version = "0.9.1" }
+candle-nn = { version = "0.9.1" }
+intel-mkl-src = { version = "0.8.1", optional = true }

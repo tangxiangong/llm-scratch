@@ -1,0 +1,11 @@
+[package]
+name = "llm-scratch"
+version = "0.1.0"
+edition = "2024"
+authors = ["tangxiangong <tangxiangong@gmail.com>"]
+description = "Build a Large Language Model (From Scratch) Rust Edition"
+publish = false
+license = "Apache-2.0 OR MIT"
+
+[dependencies]
+candle-core = { version = "0.9.1", features = ["metal"] }

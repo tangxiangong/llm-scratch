@@ -1,3 +1,7 @@
 /target
 Cargo.lock
 .DS_Store
+python/uv.lock
+python/.venv
+python/.python-version
+python/__pycache__

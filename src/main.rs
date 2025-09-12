@@ -1,10 +1,21 @@
-use candle_core::{Device, Result, Tensor};
+use candle_core::Device;
 
-fn main() -> Result<()> {
-    let device = Device::new_metal(0)?;
-    let tensor1 = Tensor::rand(0.0f32, 1.0, (2, 3), &device)?;
-    let tensor2 = Tensor::rand(0.0f32, 1.0, (2, 3), &device)?;
-    let tensor = (tensor1 + tensor2)?;
-    println!("tensor: {:?}\n {:?}", tensor, tensor.to_vec2::<f32>()?);
-    Ok(())
+fn select_backend() -> Device {
+    if let Ok(device) = Device::new_cuda(0) {
+        device
+    } else if let Ok(device) = Device::new_metal(0) {
+        device
+    } else {
+        Device::Cpu
+    }
+}
+
+fn main() {
+    println!("candle verison: 0.9.1");
+    let device = select_backend();
+    match device {
+        Device::Cuda(_) => println!("CUDA is available"),
+        Device::Metal(_) => println!("Metal is available"),
+        Device::Cpu => println!("CPU is available"),
+    }
 }

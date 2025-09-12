@@ -10,6 +10,7 @@ license = "Apache-2.0 OR MIT"
 [features]
 default = []
 mkl = ["candle-core/mkl", "candle-nn/mkl", "intel-mkl-src"]
+accelerate = ["candle-core/accelerate", "candle-nn/accelerate", "accelerate-src"]
 cuda = ["candle-core/cudnn", "candle-nn/cudnn"]
 
 [dependencies]
@@ -21,3 +22,4 @@ candle-nn = { version = "0.9.1", features = ["metal"] }
 candle-core = { version = "0.9.1" }
 candle-nn = { version = "0.9.1" }
 intel-mkl-src = { version = "0.8.1", optional = true }
+accelerate-src = { version = "0.3.2", optional = true }

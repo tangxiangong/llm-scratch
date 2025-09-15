@@ -1,10 +1,27 @@
+import tiktoken
+
+
+class GPTTokenizer(object):
+    def __init__(self):
+        self.tokenizer: tiktoken.Encoding = tiktoken.encoding_for_model("gpt-2")
+        self.special_tokens: set[str] | None = None
+
+    def add_special_tokens(self, special_tokens: list[str]):
+        self.special_tokens = set(special_tokens)
+
+    def encode(self, text: str):
+        if self.special_tokens is None:
+            return self.tokenizer.encode(text, disallowed_special="all")
+        else:
+            return self.tokenizer.encode(text, allowed_special=self.special_tokens)
+
 if __name__ == "__main__":
-    import os
 
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    data_file = os.path.join(script_dir, "..", "..", "data", "the-verdict.txt")
+    def test_tokenizer():
+        tokenizer = GPTTokenizer()
+        tokenizer.add_special_tokens(["<|endoftext|>"])
+        text = "Hello, do you like tea? <|endoftext|> In the sunlit terraces of someunkownPlace."
+        integers = tokenizer.encode(text)
+        print(integers)
 
-    with open(data_file, "r", encoding="utf-8") as f:
-        raw_text = f.read()
-    print("Total number of character:", len(raw_text))
-    print(raw_text[:100])
+    test_tokenizer()

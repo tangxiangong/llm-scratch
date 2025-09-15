@@ -1,14 +1,5 @@
 use candle_core::Device;
-
-fn select_backend() -> Device {
-    if let Ok(device) = Device::new_cuda(0) {
-        device
-    } else if let Ok(device) = Device::new_metal(0) {
-        device
-    } else {
-        Device::Cpu
-    }
-}
+use llm_scratch::utils::select_backend;
 
 fn main() {
     println!("candle verison: 0.9.1");

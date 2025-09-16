@@ -1,5 +1,7 @@
 import tiktoken
 
+from .utils import load_data
+
 
 class GPTTokenizer(object):
     def __init__(self):
@@ -15,13 +17,14 @@ class GPTTokenizer(object):
         else:
             return self.tokenizer.encode(text, allowed_special=self.special_tokens)
 
+
+def tokenization() -> list[int]:
+    raw_text = load_data()
+    tokenizer = GPTTokenizer()
+    enc_text = tokenizer.encode(raw_text)
+    return enc_text
+
+
 if __name__ == "__main__":
-
-    def test_tokenizer():
-        tokenizer = GPTTokenizer()
-        tokenizer.add_special_tokens(["<|endoftext|>"])
-        text = "Hello, do you like tea? <|endoftext|> In the sunlit terraces of someunkownPlace."
-        integers = tokenizer.encode(text)
-        print(integers)
-
-    test_tokenizer()
+    ids = tokenization()
+    print(ids)

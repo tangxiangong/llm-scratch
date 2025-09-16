@@ -1,4 +1,4 @@
-from src.tokenizer import GPTTokenizer
+from llm_scratch.tokenizer import GPTTokenizer
 
 
 def test_gpt_tokenizer():

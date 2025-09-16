@@ -1,6 +1,6 @@
 import torch
 
-from src.utils import select_backend
+from llm_scratch.utils import select_backend
 
 
 def main():
